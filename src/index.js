@@ -17,6 +17,7 @@ function Square(props) {
     }
   
     render() {
+
       return (
         <div>
           <div className="board-row">
@@ -62,6 +63,7 @@ function Square(props) {
         squares[i] = this.state.xIsNext ? 'X' : 'O';
         this.setState({history: history.concat([{
             squares: squares,
+            lastUpdatedSquare: i,
         }]), 
         stepNumber: history.length,
         xIsNext: !this.state.xIsNext,});
@@ -80,7 +82,10 @@ function Square(props) {
       const winner = calculateWinner(current.squares);
 
       const moves = history.map((step, move) => {
-          const desc = move ? 'Go to move #' + move : 'Go to game start';
+          const lastUpdatedSquare = step.lastUpdatedSquare;
+          const col = 1 + lastUpdatedSquare % 3;
+          const row = 1 + Math.floor(lastUpdatedSquare / 3);
+          const desc = move ? `Go to move #${move} (${col}, ${row})` : 'Go to game start';
           return (
               <li key={move}>
                 <button onClick={() => this.jumpTo(move)}> {desc}</button>
@@ -135,3 +140,32 @@ function Square(props) {
     }
     return null;
   }
+
+  // function calculateRowsColumns(squares) {
+  //   const rowsColumns = (squares) => {
+  //     for (let t = 0; t < 8; t++) {
+
+  //     }
+  //   }
+  // }
+
+  // function calculateRowsColumns(squares) {
+  //   const rows = [
+  //     [0, 1, 2],
+  //     [3, 4, 5],
+  //     [6, 7, 8],
+  //   ];
+
+  //   const columns = [
+  //     [0, 3, 6],
+  //     [1, 4, 7],
+  //     [2, 5, 8]
+  //   ];
+
+  //   const result = [];
+
+  //   for (var i = 0; i < rows.length; i++) {
+  //     result.push( [rows[i], columns[i] ] );
+  //   }
+  //   return console.log(result);
+  // }
