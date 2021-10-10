@@ -17,25 +17,19 @@ function Square(props) {
     }
   
     render() {
+      //double for loop to create board. each iteration of first loop is a row, then restarts after 3.
+      const boardSize = 3;
+      let squares = [];
+      for (let i = 0; i < boardSize; i++) {
+        let row = [];
+        for (let c = 0; c < boardSize; c++) {
+          row.push(this.renderSquare(i * boardSize + c));
+        }
+        squares.push(<div key={i} className="board-row">{row}</div>)
+      }
 
       return (
-        <div>
-          <div className="board-row">
-            {this.renderSquare(0)}
-            {this.renderSquare(1)}
-            {this.renderSquare(2)}
-          </div>
-          <div className="board-row">
-            {this.renderSquare(3)}
-            {this.renderSquare(4)}
-            {this.renderSquare(5)}
-          </div>
-          <div className="board-row">
-            {this.renderSquare(6)}
-            {this.renderSquare(7)}
-            {this.renderSquare(8)}
-          </div>
-        </div>
+        <div>{squares}</div>
       );
     }
 }
