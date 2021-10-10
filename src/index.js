@@ -78,6 +78,7 @@ function Square(props) {
 
     render() {
       const history = this.state.history;
+      const stepNumber = this.state.stepNumber;
       const current = history[this.state.stepNumber];
       const winner = calculateWinner(current.squares);
 
@@ -88,7 +89,7 @@ function Square(props) {
           const desc = move ? `Go to move #${move} (${col}, ${row})` : 'Go to game start';
           return (
               <li key={move}>
-                <button onClick={() => this.jumpTo(move)}> {desc}</button>
+                <button className={move === stepNumber ? 'bold' : ''} onClick={() => this.jumpTo(move)}> {desc}</button>
               </li>
           )
       })
@@ -140,32 +141,3 @@ function Square(props) {
     }
     return null;
   }
-
-  // function calculateRowsColumns(squares) {
-  //   const rowsColumns = (squares) => {
-  //     for (let t = 0; t < 8; t++) {
-
-  //     }
-  //   }
-  // }
-
-  // function calculateRowsColumns(squares) {
-  //   const rows = [
-  //     [0, 1, 2],
-  //     [3, 4, 5],
-  //     [6, 7, 8],
-  //   ];
-
-  //   const columns = [
-  //     [0, 3, 6],
-  //     [1, 4, 7],
-  //     [2, 5, 8]
-  //   ];
-
-  //   const result = [];
-
-  //   for (var i = 0; i < rows.length; i++) {
-  //     result.push( [rows[i], columns[i] ] );
-  //   }
-  //   return console.log(result);
-  // }
